@@ -1,0 +1,32 @@
+extract_text:
+
+  description: >
+    Extract text from the given PDF file path.
+
+  expected_output: >
+    A structured text output from the PDF file path.
+
+  agent: >
+    pdf_extractor
+
+analyze_invoice_text:
+
+  description: >
+    Given the extracted text from an invoice or bill and a user query,
+    analyze the content and provide an accurate, clear answer.
+
+  agent: invoice_analyzer
+
+  expected_output: >
+    A precise answer to the {user_query} about the invoice or bill, based on the extracted content.
+
+format_response:
+
+  description: >
+    Format the final analysis result into an HTML block.
+    Use inline CSS to improve readability where necessary.
+  
+  agent: response_formatter
+  
+  expected_output: >
+    HTML-formatted response, styled for clean display in a web interface.
