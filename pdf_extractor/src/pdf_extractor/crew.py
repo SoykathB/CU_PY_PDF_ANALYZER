@@ -1,6 +1,7 @@
 # src/latest_ai_development/crew.py
 from crewai import LLM, Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
 import os
 import yaml
 import fitz
@@ -23,10 +24,14 @@ class LatestAiDevelopmentCrew():
     crew = None
     agents_config = None
     tasks_config = None
+    pdf_source = None
     def __init__(self):
 
         self.agents_config = self.load_agents_config()
         self.tasks_config = self.load_tasks_config()
+        self.pdf_source = PDFKnowledgeSource(
+            file_paths=['Circular no. 146022021 GST.pdf','No. 102023 Central Tax.pdf','notfctn-13-central-tax-english-2020.pdf','notfctn-14-central-tax-english-2020.pdf','Rule 46.pdf']
+        )
         self.agents.append(
             Agent(
                 llm=llm,
@@ -34,8 +39,8 @@ class LatestAiDevelopmentCrew():
                 verbose=True,
                 allow_delegation=False,
                 result_as_answer = True,
-                max_iter=2,
-                max_retry_limit=2,
+                max_iter=1,
+                max_retry_limit=1,
                 memory=False,
                 tools=[DocumentExtracterTool()],
                 args_schema=DocumentExtracterInput,
@@ -97,6 +102,7 @@ class LatestAiDevelopmentCrew():
             tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
+            knowledge_sources=[self.pdf_source]
         )
     
     def load_agents_config(self):

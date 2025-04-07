@@ -66,7 +66,7 @@ def submit_files(prompt, files):
     #     response+=word
     #     yield response  # Send output in chunks
     #     time.sleep(0.5)  # Simulate delay
-    response = "Kindly wait till we analyze the given file"
+    response = "Kindly wait till we analyze the given file <br>"
     yield response
     # def generator():
     #     yield from main(prompt, files)  # ✅ Use `yield from` to forward the generator
@@ -97,7 +97,7 @@ css = """
     """
 # Create the Gradio interface
 with gr.Blocks(css=css) as demo:
-    gr.Markdown("# Invoive Validator Agent")
+    gr.Markdown("# Invoice Validator Agent")
     with gr.Row():
         with gr.Column():
             files = gr.File(

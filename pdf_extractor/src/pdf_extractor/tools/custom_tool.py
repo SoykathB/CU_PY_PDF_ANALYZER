@@ -24,7 +24,7 @@ class DocumentExtracterTool(BaseTool):
         """
         super().__init__()  # Ensure proper initialization of BaseTool if necessary
     
-    def _run(self,user_query: str, filepath: str):
+    def _run(self,user_query,filepath: str):
         """
         Run the tool to process the given filepath and user query.
 

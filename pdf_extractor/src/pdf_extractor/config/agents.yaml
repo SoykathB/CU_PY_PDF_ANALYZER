@@ -18,7 +18,7 @@ invoice_analyzer:
     Invoice & Billing Analyst
 
   goal: >
-    Analyze extracted invoice or billing text and answer {user_query} with precision.
+    Analyze extracted invoice or billing text and answer {user_query} with precision using knowledgebase.
 
   backstory: >
     You're a highly skilled financial analyst with deep experience in interpreting
