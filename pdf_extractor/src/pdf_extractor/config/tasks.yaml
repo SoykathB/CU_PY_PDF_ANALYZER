@@ -16,20 +16,7 @@ analyze_invoice_text:
       Analyze the content and provide an accurate, clear answer using knowledgebase.
 
   expected_output: >
-      A precise answer to the {user_query} about the invoice or bill, based on the extracted content.
-      A detailed list of potential GST non-compliance issues identified during the analysis.
-      Each point should clearly state the issue, the relevant data from the extracted text,
-      and the GST rules it potentially violates. If no issues are found, state "No potential GST compliance issues identified based on the provided data."
+      A precise HTML formatted answer to the {user_query} about the invoice or bill, based on the extracted content.
+      Can add some inline css to improve readability.
 
   agent: invoice_analyzer
-
-format_response:
-
-  description: >
-    Format the final analysis result into an HTML block.
-    Use inline CSS to improve readability where necessary.
-  
-  agent: response_formatter
-  
-  expected_output: >
-    HTML-formatted response, styled for clean display in a web interface.

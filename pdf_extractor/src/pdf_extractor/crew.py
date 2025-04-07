@@ -6,6 +6,8 @@ import os
 import yaml
 import fitz
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 from pdf_extractor.src.pdf_extractor.tools.custom_tool import DocumentExtracterInput, DocumentExtracterTool
 pdf_path = ''
 llm = LLM(
@@ -60,19 +62,6 @@ class LatestAiDevelopmentCrew():
             )
         )
 
-        self.agents.append(
-            Agent(
-                llm=llm,
-                config=self.agents_config.get('response_formatter'),
-                verbose=True,
-                allow_delegation=False,
-                result_as_answer = True,
-                max_iter=2,
-                max_retry_limit=2,
-                memory=False,
-            )
-        )
-
         self.tasks.append(
             Task(
                 description=self.tasks_config.get('extract_text').get("description"),
@@ -86,14 +75,6 @@ class LatestAiDevelopmentCrew():
                 description=self.tasks_config.get('analyze_invoice_text').get("description"),
                 expected_output=self.tasks_config.get('analyze_invoice_text').get("expected_output"),
                 agent=self.agents[1]
-            )
-        )
-
-        self.tasks.append(
-            Task(
-                description=self.tasks_config.get('format_response').get("description"),
-                expected_output=self.tasks_config.get('format_response').get("expected_output"),
-                agent=self.agents[2]
             )
         )
 
