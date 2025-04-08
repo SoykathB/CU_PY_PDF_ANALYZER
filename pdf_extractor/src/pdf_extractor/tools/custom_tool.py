@@ -1,7 +1,8 @@
 from pydantic import BaseModel, Field, PrivateAttr
 from crewai.tools import BaseTool
 from typing import Type
-from docling.document_converter import DocumentConverter
+import requests
+import json
 
 # Input schema using Pydantic
 class DocumentExtracterInput(BaseModel):
@@ -25,18 +26,19 @@ class DocumentExtracterTool(BaseTool):
         super().__init__()  # Ensure proper initialization of BaseTool if necessary
     
     def _run(self,user_query,filepath: str):
-        """
-        Run the tool to process the given filepath and user query.
 
-        Args:
-            filepath (str): The path to the file to process.
-            user_query (str): The user's query for extracting relevant data.
-
-        Returns:
-            Any: The result of the document conversion and query processing.
-        """
-        source = filepath  # document per local path or URL
-        converter = DocumentConverter()
-        result = converter.convert(source)
-        # Optionally, process the result further based on user_query
-        return result.document.export_to_markdown()
+        try:
+            url = "Your custom Url"
+            with open(filepath, "rb") as file_obj:
+                files = {
+                    "file": (filepath.split("/")[-1], file_obj)  # Just like curl does with @
+                }
+                response = requests.post(url, files=files)
+                if(response.text):
+                    data = json.loads(response.text)
+                    return data.get('data')
+                else:
+                    return 'No file found'
+    
+        except Exception as e:
+            return str(e)

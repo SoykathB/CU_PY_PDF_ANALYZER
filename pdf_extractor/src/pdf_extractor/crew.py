@@ -4,9 +4,6 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
 import os
 import yaml
-import fitz
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 from pdf_extractor.src.pdf_extractor.tools.custom_tool import DocumentExtracterInput, DocumentExtracterTool
 pdf_path = ''
@@ -17,7 +14,6 @@ llm = LLM(
             temperature=0.1,#set your temperature nd top_p
             top_p=0.95
         )
-
 @CrewBase
 class LatestAiDevelopmentCrew():
     """LatestAiDevelopment crew"""
