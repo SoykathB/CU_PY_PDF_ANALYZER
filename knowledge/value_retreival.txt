@@ -1,0 +1,3 @@
+Format of data fields.
+1. IRN Number: An Invoice Reference Number (IRN) is a unique 64-character alphanumeric code assigned to each e-invoice.
+2. CIN Number stands for Corporate Identification Number. It is a unique 21-character alphanumeric code assigned by the Registrar of Companies (RoC)

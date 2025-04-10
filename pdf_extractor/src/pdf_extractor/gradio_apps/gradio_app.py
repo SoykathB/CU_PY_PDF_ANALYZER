@@ -53,11 +53,6 @@ def submit_files(prompt, files):
     print("Selected Files:", files)
     print("Current category_files dictionary:", category_files)
 
-    if not category_files:
-        return "No files uploaded yet!"
-
-    if not files:
-        return "Please select files to submit!"
 
     # Create a formatted submission summary
     # return main(prompt,files)
@@ -95,8 +90,23 @@ css = """
     }
     #component-11{ height: 450px; overflow-y: auto !important; border-width: 1px !important ; border-color: e4e4e4 !important }
     """
+
+js="""
+    function(){
+        setInterval((a)=>{
+        const div = document.getElementById('component-11');
+    if (!div) return;
+
+    const isNearBottom = div.scrollHeight - div.scrollTop - div.clientHeight < 50;
+
+    if (isNearBottom) {
+        div.scrollTop = div.scrollHeight;
+    }
+    },500);
+    }
+"""
 # Create the Gradio interface
-with gr.Blocks(css=css) as demo:
+with gr.Blocks(css=css,js=js) as demo:
     gr.Markdown("# Invoice Validator Agent")
     with gr.Row():
         with gr.Column():
@@ -123,7 +133,6 @@ with gr.Blocks(css=css) as demo:
 
 
     # Event handlers
-    files.change(fn=append_files, inputs=[files])
 
     clear_btn.click(fn=clear_files, inputs=None, outputs=[files])
 

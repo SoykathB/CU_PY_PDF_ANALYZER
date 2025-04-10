@@ -1,0 +1,8 @@
+These are the rules to validate Invoice on standard GST Terms.
+
+1. Verify presence of mandatory fields: Supplier GSTIN, Recipient GSTIN (if applicable), Invoice No., Invoice Date, HSN/SAC codes, Taxable Value, Tax Rates, Total Value.
+2. Check format validity of Supplier and Recipient GSTINs (15-character alphanumeric, starts with state code).
+3. Assess tax application: If Place of Supply indicates intra-state, verify CGST + SGST; if inter-state, verify IGST. If Place of Supply is missing, note it.
+4. Validate tax calculations: Check if Taxable Value × Tax Rate ≈ Tax Amount (allow small rounding difference).
+5. Validate Total Amount: Ensure Total Taxable + CGST + SGST + IGST ≈ Total Invoice Value.
+6. Ensure Total Amount in Numbers matches the Total Amount in Words exactly (This is a mandatory check).

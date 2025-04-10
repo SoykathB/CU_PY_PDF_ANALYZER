@@ -1,22 +1,31 @@
-extract_text:
-
+analyze_invoice_from_pdf:
   description: >
-    Extract text from the given PDF file path.
+    Given a PDF invoice file path and a user query, extract the PDF content and analyze the invoice
+    to provide a clear, accurate answer to the user's query.
+
+    You must:
+    - First extract all text from the provided {filepath} using DocumentExtractor Tool
+    - Then analyze the content and interpret the financial data
+    - Use the {user_query} to guide your analysis
 
   expected_output: >
-    A structured text output from the PDF file path.
+    An HTML formatted response that answers the {user_query} about the invoice or bill.
+    The HTML can contain inline CSS for better readability (like tables, bold values, etc.).
 
-  agent: >
-    pdf_extractor
+  agent: invoice_processor
 
-analyze_invoice_text:
 
+extract_pdf_info_task:
   description: >
-      Given the extracted text from an invoice or bill and a user query,
-      Analyze the content and provide an accurate, clear answer using knowledgebase.
+      For each item in the {configuration}, extract the data from the given {pdf_data}.
+      Each item contains a key, description. Use the description to understand what information to extract from the  pdf data.
+      If you can't find relevant data, return the key with an empty string.
+
+      Format of data fields.
+      1. IRN Number: An Invoice Reference Number (IRN) is a unique 64-character alphanumeric code assigned to each e-invoice.
+      2. CIN Number stands for Corporate Identification Number. It is a unique 21-character alphanumeric code assigned by the Registrar of Companies (RoC)
+      3. Date always should be in format (DD-MM-YYYY)
 
   expected_output: >
-      A precise HTML formatted answer to the {user_query} about the invoice or bill, based on the extracted content.
-      Can add some inline css to improve readability.
-
-  agent: invoice_analyzer
+      A proper formatted dictionary with keys from the given configurations and the extracted value or an empty string.
+      NO other data is required

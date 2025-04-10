@@ -6,10 +6,6 @@ import json
 
 # Input schema using Pydantic
 class DocumentExtracterInput(BaseModel):
-    user_query: str = Field(
-        title="User Query",
-        description="The user query in normal natural language to understand and fetch the relevant data from identified Databases",
-    )
     filepath: str = Field(
         title="FilePath",
         description="The Actual path of the file where gradio saves",
@@ -25,10 +21,10 @@ class DocumentExtracterTool(BaseTool):
         """
         super().__init__()  # Ensure proper initialization of BaseTool if necessary
     
-    def _run(self,user_query,filepath: str):
+    def _run(self,filepath: str):
 
         try:
-            url = "Your custom Url"
+            url = "Your Url"
             with open(filepath, "rb") as file_obj:
                 files = {
                     "file": (filepath.split("/")[-1], file_obj)  # Just like curl does with @

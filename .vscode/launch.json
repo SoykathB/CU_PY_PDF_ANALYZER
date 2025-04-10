@@ -8,6 +8,20 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false
-        }
+        },
+        {
+            "name": "FastAPI: Uvicorn",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+              "pdf_extractor.src.pdf_extractor.fast_api.main:app",          // Change this to match your filename and app instance
+              "--host", "0.0.0.0",
+              "--port", "8080",
+              "--reload"
+            ],
+            "jinja": true,
+            "justMyCode": false
+          }
     ]
 }
